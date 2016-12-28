@@ -133,11 +133,15 @@ void Hub::connect(std::string uri, void *user, int timeoutMs, Group<CLIENT> *eh)
     }
 }
 
+// konstruera en socket av fd och ssl, eller ta en socket direkt!
 bool Hub::upgrade(uv_os_sock_t fd, const char *secKey, SSL *ssl, const char *extensions, size_t extensionsLength, const char *subprotocol, size_t subprotocolLength, Group<SERVER> *serverGroup) {
     if (!serverGroup) {
         serverGroup = &getDefaultGroup<SERVER>();
     }
 
+    //group.createHTTPSocket(fd, ssl)
+
+    // createHttpSocket(fd, ssl, servergroup)
     uS::Socket s = uS::Socket::init((uS::NodeData *) serverGroup, fd, ssl);
     uS::SocketData *socketData = s.getSocketData();
     HTTPSocket<SERVER>::Data *temporaryHttpData = new HTTPSocket<SERVER>::Data(socketData);
