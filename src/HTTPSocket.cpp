@@ -354,6 +354,7 @@ void HttpSocket<isServer>::onEnd(uS::Socket s) {
 
     if (!isServer) {
         getGroup<CLIENT>(s)->errorHandler(httpSocketData->httpUser);
+        s.cancelTimeout();
     }
 
     delete httpSocketData;
