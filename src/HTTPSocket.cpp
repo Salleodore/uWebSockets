@@ -2,6 +2,7 @@
 #include "Group.h"
 #include "Extensions.h"
 #include <cstdio>
+#include <sstream>
 
 #define MAX_HEADERS 100
 #define MAX_HEADER_BUFFER_SIZE 4096
@@ -176,6 +177,13 @@ uS::Socket *HttpSocket<isServer>::onData(uS::Socket *s, char *data, size_t lengt
 
                     return webSocket;
                 } else {
+                    int code = 0;
+                    std::istringstream is(std::string(headers[0].value, headers[0].valueLength));
+                    is >> code;
+                    std::string message;
+                    std::getline(is, message);
+                    std::string contents = cursor;
+                    Group<CLIENT>::from(httpSocket)->setCloseStatus(code, message, contents);
                     httpSocket->onEnd(httpSocket);
                 }
                 return httpSocket;
