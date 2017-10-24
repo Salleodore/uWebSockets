@@ -5,11 +5,6 @@ project (µWebSockets)
 
 option(BUILD_SHARED_LIBS "Build shared libraries." ON)
 
-if (NOT WIN32)
-	find_package(OpenSSL REQUIRED)
-	find_package(ZLIB REQUIRED)
-endif()
-
 if(NOT LIBUV_INCLUDE_DIR)
     find_path(LIBUV_INCLUDE_DIR uv.h)
 endif()
