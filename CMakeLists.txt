@@ -12,13 +12,7 @@ if(NOT LIBUV_LIBRARY)
     find_library(LIBUV_LIBRARY NAMES uv uv1)
 endif()
 
-set(UWEBSOCKETS_SRCS src/Extensions.cpp src/Group.cpp src/Networking.cpp src/Hub.cpp src/Node.cpp src/WebSocket.cpp src/HTTPSocket.cpp src/Socket.cpp)
-
-if (UNIX AND NOT APPLE)
-	set(UWEBSOCKETS_SRCS "${UWEBSOCKETS_SRCS} src/Epoll.cpp")
-endif()
-
-add_library(uWS ${UWEBSOCKETS_SRCS})
+add_library(uWS src/Extensions.cpp src/Group.cpp src/Networking.cpp src/Hub.cpp src/Node.cpp src/WebSocket.cpp src/HTTPSocket.cpp src/Socket.cpp src/Epoll.cpp)
 
 if(CMAKE_VERSION VERSION_LESS "3.1")
     # CMake 3.0 does not implement "CMAKE_CXX_STANDARD":
