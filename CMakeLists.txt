@@ -15,7 +15,7 @@ endif()
 set(UWEBSOCKETS_SRCS src/Extensions.cpp src/Group.cpp src/Networking.cpp src/Hub.cpp src/Node.cpp src/WebSocket.cpp src/HTTPSocket.cpp src/Socket.cpp)
 
 if (UNIX AND NOT APPLE)
-	set(UWEBSOCKETS_SRCS "${UWEBSOCKETS_SRCS} Epoll.cpp")
+	set(UWEBSOCKETS_SRCS "${UWEBSOCKETS_SRCS} src/Epoll.cpp")
 endif()
 
 add_library(uWS ${UWEBSOCKETS_SRCS})
