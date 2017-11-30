@@ -182,7 +182,7 @@ uS::Socket *HttpSocket<isServer>::onData(uS::Socket *s, char *data, size_t lengt
                     is >> code;
                     std::string message;
                     std::getline(is, message);
-                    std::string contents = cursor;
+                    std::string contents(cursor, end - cursor);
                     Group<CLIENT>::from(httpSocket)->setCloseStatus(code, message, contents);
                     httpSocket->onEnd(httpSocket);
                 }
