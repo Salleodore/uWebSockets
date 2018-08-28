@@ -45,7 +45,11 @@ struct Loop {
     void *preCbData, *postCbData;
 
     Loop(bool defaultLoop) {
+#ifndef __ANDROID__
         epfd = epoll_create1(EPOLL_CLOEXEC);
+#else
+        epfd = epoll_create(1);
+#endif
         timepoint = std::chrono::system_clock::now();
     }
 
